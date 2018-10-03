@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Loadable from 'react-loadable';
+
+const Feeds = Loadable({
+	loader: () => import('./feeds/Feeds'),
+	loading: () => <div>loading .... </div>
+});
+
+
+
 class App extends Component {
+	state = { showFeeds: false }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+				base index file -----
+
+				<div style={{ margin: '50 10' }}>
+					<button onClick={() => this.setState({ showFeeds: true })} > show feeds </button>
+				</div>
+
+				<div>
+					{this.state.showFeeds && <Feeds />}
+				</div>
       </div>
     );
   }
